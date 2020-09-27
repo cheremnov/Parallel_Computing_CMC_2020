@@ -8,7 +8,7 @@
 /**
  * A wrapper over a graph generation
  * Warning: 
- * 	   Delete 
+ * 	   Manually delete the arrays afterwards
  */
 void generateWrapper( size_t row_len, size_t column_len, size_t undivided, size_t divided,
 	int* N, int** IA, int** JA){
