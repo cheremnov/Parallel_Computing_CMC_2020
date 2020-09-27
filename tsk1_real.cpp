@@ -1,10 +1,29 @@
 /**
  * A main module for the task1.
  */
- #include "omp.h"
- #include "tsk1_utils.h"
-
- int main( int argc, char **argv){
+#include <cstring>
+#include "omp.h"
+#include "tsk1_utils.h"
+ 
+/**
+ * A wrapper over a graph generation
+ * Warning: 
+ * 	   Delete 
+ */
+void generateWrapper( size_t row_len, size_t column_len, size_t undivided, size_t divided,
+	int* N, int** IA, int** JA){
+	MatrixParameters matrix_param( row_len, column_len, undivided, divided);
+	NetGraph graph( &matrix_param);
+	graph.generate( &matrix_param);
+	*N = graph.getNodesCount();
+	// Allocate memory
+	size_t edges_max = *N * NETGRAPH_MAX_EDGES_NODE;
+	*IA = new int[edges_max];
+	*JA = new int[edges_max];
+	memcpy( *IA, graph.getIA(), edges_max);
+	memcpy( *JA, graph.getJA(), edges_max);
+}
+int main( int argc, char **argv){
     if( argc == 1 ){
         printHelp();
         return 0;

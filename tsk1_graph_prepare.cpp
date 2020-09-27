@@ -4,6 +4,7 @@
 #include <iostream>
 #include <omp.h>
 #include "tsk1_graph_prepare.h"
+#define OMP_THREADS 2
 /**
  * Generate a graph of a network from a matrix
  * of a pre-set parameters
@@ -18,7 +19,7 @@ NetGraph::generate( MatrixParameters *params_p ){
      * An edge index in a simple case is a data dependency
      * Can't sum all the edges from the previous rows — a formula is required.
      */
-    #pragma omp parallel for num_threads(4)
+    #pragma omp parallel for num_threads(OMP_THREADS)
     for( size_t row_idx = 0; row_idx <= row_len; ++row_idx )
     {            
         std::pair<int, int> cells = countDividedCells( row_idx, params_p);
@@ -53,6 +54,8 @@ NetGraph::generate( MatrixParameters *params_p ){
             edge_idx += new_row_not_divided_nodes * NETGRAPH_NOT_DIVIDED_EDGES + 
                 new_row_divided_nodes * NETGRAPH_DIVIDED_EDGES + 1;
         }
+		// Add edges from the node to itself
+		edge_idx += row_idx * (column_len + 1);
         for( size_t column_idx = 0; column_idx <= column_len; ++column_idx )
         { 
             size_t node_idx = row_idx * (column_len + 1) + column_idx;
@@ -79,6 +82,10 @@ NetGraph::generate( MatrixParameters *params_p ){
                 A[edge_idx] = 1;
                 ++edge_idx;
             }
+			// Edge from a node to itself
+			JA[edge_idx] = node_idx;
+			A[edge_idx] = 1;
+			++edge_idx;
             // Edge from (row_idx; column_idx) to (row_idx; column_idx + 1)
             if( column_idx < column_len ){
                 JA[edge_idx] = node_idx + 1;

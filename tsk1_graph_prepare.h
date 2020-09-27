@@ -70,7 +70,6 @@ NetGraph( MatrixParameters *params_p ){
     delete JA;
     delete A;
 }
-void generate( MatrixParameters *params_p );
 void printGraph(){
     for( int node_idx = 0; node_idx < nodes_count_; ++node_idx ){
         std::cout << "Node index: " << node_idx << std::endl << "Edges to: ";
@@ -80,10 +79,20 @@ void printGraph(){
         std::cout << std::endl;
     }
 }
+size_t getNodesCount(){
+	return nodes_count_;
+}
+int* getIA(){
+	return IA;
+}
+int* getJA(){
+	return JA;
+}
+void generate( MatrixParameters *params_p );
 std::pair<int, int> countDividedCells( size_t row_idx, MatrixParameters* params_p );
 private:
     int* IA;
     int* JA;
     int* A;
-    int nodes_count_;
+    size_t nodes_count_;
 };
