@@ -1,5 +1,6 @@
 #include <iostream>
 #include <cstddef>
+#include <cmath>
 enum { 
     NETGRAPH_MAX_EDGES_NODE = 6,
     NETGRAPH_NOT_DIVIDED_EDGES = 2,
@@ -63,7 +64,7 @@ NetGraph( MatrixParameters *params_p ){
     size_t edges_count_max = nodes_count_ * NETGRAPH_MAX_EDGES_NODE;
     IA = new int[nodes_count_ + 1];
     JA = new int[2 * edges_count_max];
-    A = new int[2 * edges_count_max];
+    A = new double[2 * edges_count_max];
 }
 ~NetGraph(){
     delete IA;
@@ -75,6 +76,10 @@ void printGraph(){
         std::cout << "Node index: " << node_idx << std::endl << "Edges to: ";
         for( int edge_idx = IA[node_idx]; edge_idx < IA[node_idx+1]; ++edge_idx){
             std::cout << JA[edge_idx] << " ";
+        }
+        std::cout << std::endl << "Matrix elements: ";
+        for( int edge_idx = IA[node_idx]; edge_idx < IA[node_idx+1]; ++edge_idx){
+            std::cout << A[edge_idx] << " ";
         }
         std::cout << std::endl;
     }
@@ -88,11 +93,12 @@ int* getIA(){
 int* getJA(){
 	return JA;
 }
-void generate( MatrixParameters *params_p );
+void generate( MatrixParameters *params_p, int threads_num );
+void fillMatrix( int threads_num);
 std::pair<int, int> countDividedCells( size_t row_idx, MatrixParameters* params_p );
 private:
     int* IA;
     int* JA;
-    int* A;
+    double* A;
     size_t nodes_count_;
 };

@@ -4,13 +4,13 @@
 #include <iostream>
 #include <omp.h>
 #include "tsk1_graph_prepare.h"
-#define OMP_THREADS 2
 /**
  * Generate a graph of a network from a matrix
- * of a pre-set parameters
+ * of a pre-set parameters.
  */
 void
-NetGraph::generate( MatrixParameters *params_p ){
+NetGraph::generate( MatrixParameters *params_p, 
+                    int threads_num = 1){  // A number of threads
     size_t row_len = params_p->getRowLen();
     size_t column_len = params_p->getColumnLen();
     size_t not_divided = params_p->getNotDivided();
@@ -18,8 +18,10 @@ NetGraph::generate( MatrixParameters *params_p ){
     /**
      * An edge index in a simple case is a data dependency
      * Can't sum all the edges from the previous rows — a formula is required.
+     * Calculate the indexes for the rows independently
      */
-    #pragma omp parallel for num_threads(OMP_THREADS)
+    omp_set_num_threads( threads_num);
+    #pragma omp parallel for
     for( size_t row_idx = 0; row_idx <= row_len; ++row_idx )
     {            
         std::pair<int, int> cells = countDividedCells( row_idx, params_p);
@@ -144,4 +146,35 @@ NetGraph::countDividedCells( size_t row_idx, MatrixParameters* params_p){
     } 
     size_t row_divided_nodes = row_cells - row_not_divided_nodes;
     return std::make_pair( row_not_divided_nodes, row_divided_nodes);
+}
+/** 
+ * Fill the matrix
+ * Make it diagonally dominant
+ */
+void NetGraph::fillMatrix( int threads_num ){ // A number of threads
+    const double DOMINANCE_COEFF = 2;
+    omp_set_num_threads( threads_num);
+    //
+    #pragma omp parallel for
+    for( size_t node_idx = 0; node_idx < nodes_count_; ++node_idx){
+        // A sum of all matrix cells on the row, except for the diagonal
+        double row_sum = 0;
+        /** 
+         * A position of a diagonal element:
+         * of a node that has an edge to itself
+         */
+        size_t diagonal_idx = 0;
+        for( size_t edge_idx = IA[node_idx]; edge_idx < IA[node_idx+1]; ++edge_idx){
+            // An other node of the edge
+            size_t neighbor_idx = JA[edge_idx];
+            if( neighbor_idx == node_idx ){
+                diagonal_idx = edge_idx;
+            } else{
+                A[edge_idx] = cos( node_idx + neighbor_idx 
+                    + node_idx * neighbor_idx );
+                row_sum += fabs( A[edge_idx]);
+            }
+        }
+        A[diagonal_idx] = DOMINANCE_COEFF * row_sum;
+    }
 }

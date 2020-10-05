@@ -3,6 +3,7 @@
  */
 #include <cstring>
 #include <fstream>
+#include <sstream>
 #include "tsk1_real.h"
 #include "tsk1_graph_prepare.h"
 enum { 
@@ -16,6 +17,7 @@ void printHelp(){
     std::cout << "tsk1 FILE_NAME [-d]" << std::endl;
     std::cout << "File must be put at the same directory" << std::endl;
     std::cout << "-d enables a debug print" << std::endl;
+    std::cout << "-t (--threads) specify a number of threads" << std::endl;
 }
 /**
  * Read the parameters from the file
@@ -68,6 +70,20 @@ int parseCMDArguments( int argc, char** argv,
     for( int arg_idx = 1; arg_idx < argc; ++arg_idx ){
         if( !strcmp( "-d", argv[arg_idx]) ){
             program_env_p->setDebugPrint( true);
+        }
+        if( !strcmp( "--threads", argv[arg_idx]) || 
+            !strcmp( "-t", argv[arg_idx]) ){
+            if( arg_idx + 1 >= argc ){
+                std::cout << "Can't parse a number of threads" << std::endl;
+                return -1;
+            }
+            int num_threads = 0;
+            if( !(std::istringstream( argv[arg_idx + 1]) >> num_threads) 
+                || num_threads <= 0){
+                std::cout << "Can't parse a number of threads" << std::endl;
+                return -1;
+            }
+            program_env_p->setThreadsNum( num_threads);
         }
     }
     return 0;

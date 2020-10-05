@@ -4,6 +4,7 @@
 #include <cstring>
 #include "omp.h"
 #include "tsk1_utils.h"
+#include "tsk1_vector.h"
  
 /**
  * A wrapper over a graph generation
@@ -14,7 +15,7 @@ void generateWrapper( size_t row_len, size_t column_len, size_t undivided, size_
 	int* N, int** IA, int** JA){
 	MatrixParameters matrix_param( row_len, column_len, undivided, divided);
 	NetGraph graph( &matrix_param);
-	graph.generate( &matrix_param);
+	graph.generate( &matrix_param, 1);
 	*N = graph.getNodesCount();
 	// Allocate memory
 	size_t edges_max = *N * NETGRAPH_MAX_EDGES_NODE;
@@ -36,11 +37,15 @@ int main( int argc, char **argv){
     }
     NetGraph graph( &matrix_param);
     double start = omp_get_wtime();
-    graph.generate( &matrix_param);
+    graph.generate( &matrix_param, program_env.getThreadsNum());
+    graph.fillMatrix( program_env.getThreadsNum());
+    MathVector b_vec( graph.getNodesCount());
+    b_vec.fillVector( program_env.getThreadsNum());
     double end = omp_get_wtime();
     std::cout << "Time: " << end - start << std::endl;
     if( program_env.isDebugPrint() ){
         graph.printGraph();
+        b_vec.printVector();
     }
     return 0;
  }
