@@ -14,6 +14,17 @@ To make the separate measurement for the basic operations of the solver, run a
 The first argument is an input file. The threads number is specified with "-t"
 option. Enable the debug print with "-d" option.
 
+# Code structure:
+A program main module is tsk1\_real.cpp
+
+Generation and fill phases happed in tsk1\_graph\_prepare.cpp and its header
+file.
+
+A part of the fill phase is in the tsk1\_vector.cpp. It is a module implementing
+a MathVector, a vector in the mathematical sense.
+
+A solver is implemented in the tsk1\_solver.cpp. 
+
 # Perfomance results
 I measured the perfomance on the Intel(R) Core(TM) i7-6700HQ CPU @ 2.60GHz. It
 has 4 cores.
