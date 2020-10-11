@@ -17,7 +17,7 @@ option. Enable the debug print with "-d" option.
 # Code structure:
 A program main module is tsk1\_real.cpp
 
-Generation and fill phases happed in tsk1\_graph\_prepare.cpp and its header
+Generation and fill phases happen in tsk1\_graph\_prepare.cpp and its header
 file.
 
 A part of the fill phase is in the tsk1\_vector.cpp. It is a module implementing
