@@ -19,9 +19,9 @@ I measured the perfomance on the Intel(R) Core(TM) i7-6700HQ CPU @ 2.60GHz. It
 has 4 cores.
 
 A perfomance for the different phases.
-+--------+------------+-------+----------+
+
 |Measure |Matrix size |Threads|Time (s.) |
-+--------+------------+-------+----------+
+|--------|------------|-------|----------|
 |All     |       50000|      1| 0.0800002|
 |All     |       50000|      4| 0.0450001|
 |All     |      500000|      1| 0.0800002|
@@ -46,12 +46,12 @@ A perfomance for the different phases.
 |Solver  |      500000|      4| 0.2640000| 
 |Solver  |     5000000|      1| 5.265    |
 |Solver  |     5000000|      4| 2.65     | 
-+--------+------------+-------+----------+
+
 
 The memory usage for the different phases:
-+--------+------------+-----------+
+
 |Measure |Matrix size |Memory     |
-+--------+------------+-----------+
+|--------|------------|-----------|
 |All     |       50000|    9408512|
 |All     |      500000|   80035840| 
 |All     |     5000000|  783544320| 
@@ -64,15 +64,14 @@ The memory usage for the different phases:
 |Solver  |       50000|     417792|
 |Solver  |      500000|          0| 
 |Solver  |     5000000|          0| 
-+--------+------------+-----------+
 
 The operations inside the solve also can be measured separately
 DotPr — the dot product
 LinComb - the linear combination
 SparseMV - the sparse multiplication
-+--------+------------+-------+----------+
+
 |Measure |Matrix size |Threads|Time (s.) |
-+--------+------------+-------+----------+
+|--------|------------|-------|----------|
 |Solver  |       50000|      1| 0.0540001|
 |Solver  |       50000|      4| 0.0330000|
 |Solver  |      500000|      1| 0.4590000|
@@ -97,12 +96,11 @@ SparseMV - the sparse multiplication
 |SparseMV|      500000|      4| 0.0900004|
 |SparseMV|     5000000|      1| 2.903    | 
 |SparseMV|     5000000|      4| 1.072    |
-+--------+------------+-------+----------+
 
 The memory usage:
-+--------+------------+-----------+
+
 |Measure |Matrix size |Memory     |
-+--------+------------+-----------+
+|--------|------------|-----------|
 |All     |       50000|    9408512|
 |All     |      500000|   80035840| 
 |Generate|       50000|    7503872| 
@@ -111,6 +109,5 @@ The memory usage:
 |Fill    |      500000|    4050944|
 |Solver  |       50000|     417792|
 |Solver  |      500000|          0| 
-+--------+------------+-----------+
 
 TODO: Measure the perfomance on the cluster.
