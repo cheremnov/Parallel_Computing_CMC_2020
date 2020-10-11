@@ -20,7 +20,7 @@ NetGraph::generate( MatrixParameters *params_p,
      * Can't sum all the edges from the previous rows — a formula is required.
      * Calculate the indexes for the rows independently
      */
-    omp_set_num_threads( threads_num);
+    //omp_set_num_threads( threads_num);
     #pragma omp parallel for
     for( size_t row_idx = 0; row_idx <= row_len; ++row_idx )
     {            
@@ -111,8 +111,9 @@ NetGraph::generate( MatrixParameters *params_p,
                 ++edge_idx;
             }
         }
+        // On the last row write the total number of edges
         if( row_idx == row_len ){
-            IA[ (row_len + 1) * (column_len + 1)] = edge_idx;
+            edges_count_ = edge_idx;
         }
     }
 }
@@ -153,18 +154,24 @@ NetGraph::countDividedCells( size_t row_idx, MatrixParameters* params_p){
  */
 void NetGraph::fillMatrix( int threads_num ){ // A number of threads
     const double DOMINANCE_COEFF = 2;
-    omp_set_num_threads( threads_num);
+    //omp_set_num_threads( threads_num);
     //
     #pragma omp parallel for
     for( size_t node_idx = 0; node_idx < nodes_count_; ++node_idx){
         // A sum of all matrix cells on the row, except for the diagonal
         double row_sum = 0;
+        /**
+         * For the rightmost node IA doesn't specify the edges index.
+         * Instead, get it from the graph
+         */
+        size_t end_idx = node_idx + 1 < nodes_count_ ? IA[node_idx + 1] :
+            edges_count_;
         /** 
          * A position of a diagonal element:
          * of a node that has an edge to itself
          */
         size_t diagonal_idx = 0;
-        for( size_t edge_idx = IA[node_idx]; edge_idx < IA[node_idx+1]; ++edge_idx){
+        for( size_t edge_idx = IA[node_idx]; edge_idx < end_idx; ++edge_idx){
             // An other node of the edge
             size_t neighbor_idx = JA[edge_idx];
             if( neighbor_idx == node_idx ){
@@ -177,4 +184,36 @@ void NetGraph::fillMatrix( int threads_num ){ // A number of threads
         }
         A[diagonal_idx] = DOMINANCE_COEFF * row_sum;
     }
+}
+/**
+ * Make a diagonal matrix from the current graph
+ * If is_reverse = true, then make it reversed
+ */
+NetGraph NetGraph::makeDiagonalMatrix( bool is_reverse){
+    int* diagonal_IA = new int[nodes_count_];
+    int* diagonal_JA = new int[nodes_count_];
+    double* diagonal_A = new double[nodes_count_];
+    #pragma omp parallel for
+    for( size_t node_idx = 0; node_idx < nodes_count_; ++node_idx ){
+        diagonal_IA[node_idx] = node_idx;
+        /**
+         * For the rightmost node IA doesn't specify the edges index.
+         * Instead, get it from the graph
+         */
+        size_t end_idx = node_idx + 1 < nodes_count_ ? IA[node_idx + 1] :
+            edges_count_;
+        for( size_t edge_idx = IA[node_idx]; edge_idx < end_idx;
+        ++edge_idx){
+            if(JA[edge_idx] == node_idx ){
+                diagonal_JA[node_idx] = node_idx;
+                if( is_reverse ){
+                    diagonal_A[node_idx] = 1.0 / A[edge_idx];
+                } else{
+                    diagonal_A[node_idx] = A[edge_idx];
+                }
+            }
+        }
+    }
+    return NetGraph( nodes_count_, nodes_count_, diagonal_IA, diagonal_JA,
+    diagonal_A);
 }

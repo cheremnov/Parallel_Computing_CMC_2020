@@ -4,8 +4,17 @@
 #include <cstring>
 #include <fstream>
 #include <sstream>
+#include <stdint.h>
+#ifdef __MINGW32__
+#include <windows.h>
+#include <psapi.h>
+#endif
 #include "tsk1_real.h"
 #include "tsk1_graph_prepare.h"
+// Measure memory usage on Windows
+#ifdef __MINGW32__
+    #define MEASURE_MEMORY
+#endif
 enum { 
     // A file argument number
     FILE_ARG_NUM = 1 
@@ -87,4 +96,19 @@ int parseCMDArguments( int argc, char** argv,
         }
     }
     return 0;
+}
+/**
+ * Get the memory usage of the program
+ */
+uint64_t getMemoryUsage(){
+// Currently only Windows is supported
+#ifdef __MINGW32__
+    PROCESS_MEMORY_COUNTERS_EX pmc;
+    GetProcessMemoryInfo( GetCurrentProcess(), (PROCESS_MEMORY_COUNTERS*)&pmc, sizeof(pmc));
+    uint64_t virtual_mem_used_by_me = static_cast<uint64_t>( pmc.PrivateUsage); 
+    return virtual_mem_used_by_me;
+#else
+    std::cout << "The compiler on this OS isn't supported for memory usage"; 
+    return 0;
+#endif
 }

@@ -1,3 +1,5 @@
+#ifndef GRAPH_PREPARE_H
+    #define GRAPH_PREPARE_H
 #include <iostream>
 #include <cstddef>
 #include <cmath>
@@ -56,6 +58,10 @@ private:
     size_t divided_;
 };
 class NetGraph{
+/** 
+ * A matrix describes the graph.
+ * Matrix rows are the graph nodes.
+ */
 public:
 NetGraph( MatrixParameters *params_p ){
     size_t row_len = params_p->getRowLen();
@@ -66,19 +72,34 @@ NetGraph( MatrixParameters *params_p ){
     JA = new int[2 * edges_count_max];
     A = new double[2 * edges_count_max];
 }
+/** 
+ * Not generate a graph(a matrix) conventional way
+ * Instead, manually insert already prepared
+ */
+NetGraph( size_t nodes_count, size_t edges_count, int* IA, int *JA, double *A){
+    nodes_count_ = nodes_count;
+    edges_count_ = edges_count;
+    this->IA = IA;
+    this->JA = JA;
+    this->A = A;
+}
 ~NetGraph(){
     delete IA;
+    // Not-null matrix columns
     delete JA;
+    // An array that stores matrix coefficients
     delete A;
 }
 void printGraph(){
     for( int node_idx = 0; node_idx < nodes_count_; ++node_idx ){
-        std::cout << "Node index: " << node_idx << std::endl << "Edges to: ";
-        for( int edge_idx = IA[node_idx]; edge_idx < IA[node_idx+1]; ++edge_idx){
+        std::cout << "Node index: " << node_idx << std::endl << "Edges to: ";        
+        size_t end_idx = node_idx + 1 < nodes_count_ ? IA[node_idx + 1] :
+            edges_count_;
+        for( int edge_idx = IA[node_idx]; edge_idx < end_idx; ++edge_idx){
             std::cout << JA[edge_idx] << " ";
         }
         std::cout << std::endl << "Matrix elements: ";
-        for( int edge_idx = IA[node_idx]; edge_idx < IA[node_idx+1]; ++edge_idx){
+        for( int edge_idx = IA[node_idx]; edge_idx < end_idx; ++edge_idx){
             std::cout << A[edge_idx] << " ";
         }
         std::cout << std::endl;
@@ -87,18 +108,34 @@ void printGraph(){
 size_t getNodesCount(){
 	return nodes_count_;
 }
+size_t getEdgesCount(){
+    return edges_count_;
+}
 int* getIA(){
 	return IA;
 }
 int* getJA(){
 	return JA;
 }
+double* getA(){
+    return A;
+}
 void generate( MatrixParameters *params_p, int threads_num );
 void fillMatrix( int threads_num);
 std::pair<int, int> countDividedCells( size_t row_idx, MatrixParameters* params_p );
+NetGraph makeDiagonalMatrix( bool is_reverse);
 private:
+    /** 
+     * JA and A stores information about all rows.
+     * To get information about a single row,
+     * you have to know the index, where
+     * JA and A store it.
+     */
     int* IA;
     int* JA;
     double* A;
     size_t nodes_count_;
+    // A number of the edges( not-null cells) in the graph
+    size_t edges_count_;
 };
+#endif
