@@ -65,33 +65,44 @@ MathVector sparseMV( NetGraph& graph, MathVector& vec){
     }
     return new_vec;
 }
-#ifdef MEASURE_VECTOR_OPS
 /**
  * The wrappers over the basic operations.
  * Calculate the time of the basic operations and append it to the time.
+ * The time is calculated only if MEASURE_VECTOR_OPS define is set
  */
 double dotProductWithMeasure( MathVector& vec_a, MathVector& vec_b, double&
 time){
+	#ifdef MEASURE_VECTOR_OPS
     double start_time = omp_get_wtime();
+	#endif
     double dot_product = dotProduct( vec_a, vec_b);
+	#ifdef MEASURE_VECTOR_OPS
     double end_time = omp_get_wtime();
     time += (end_time - start_time);
+	#endif
     return dot_product;
 }
 MathVector linearCombinationWithMeasure( MathVector& vec_a, MathVector& vec_b, 
                    double alpha_coeff, double beta_coeff, double& time){
+	#ifdef MEASURE_VECTOR_OPS				
     double start_time = omp_get_wtime();
+	#endif
     MathVector linear_combination = linearCombination( vec_a, vec_b,
     alpha_coeff, beta_coeff);
+	#ifdef MEASURE_VECTOR_OPS
     double end_time = omp_get_wtime();
     time += end_time - start_time;
+	#endif
     return linear_combination;
 }
 MathVector sparseMVWithMeasure( NetGraph& graph, MathVector& vec, double& time){
+	#ifdef MEASURE_VECTOR_OPS
     double start_time = omp_get_wtime();
+	#endif
     MathVector sparse_mv = sparseMV( graph, vec);
+	#ifdef MEASURE_VECTOR_OPS
     double end_time = omp_get_wtime();
     time += end_time - start_time;
+	#endif
     return sparse_mv;
 }
-#endif

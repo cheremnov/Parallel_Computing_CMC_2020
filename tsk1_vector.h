@@ -94,7 +94,6 @@ double dotProduct( MathVector& vec_a, MathVector& vec_b);
 MathVector linearCombination( MathVector& vec_a, MathVector& vec_b, 
                    double alpha_coeff, double beta_coeff);
 MathVector sparseMV( NetGraph& graph, MathVector& vec);
-    #ifdef MEASURE_VECTOR_OPS
 /**
  * The wrappers over the basic operations.
  * Calculate the time of the basic operations and append it to the time.
@@ -104,5 +103,4 @@ time);
 MathVector linearCombinationWithMeasure( MathVector& vec_a, MathVector& vec_b, 
                    double alpha_coeff, double beta_coeff, double& time);
 MathVector sparseMVWithMeasure( NetGraph& graph, MathVector& vec, double& time);
-    #endif
 #endif
