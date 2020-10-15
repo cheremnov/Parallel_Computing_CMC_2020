@@ -116,6 +116,7 @@ NetGraph::generate( MatrixParameters *params_p,
             edges_count_ = edge_idx;
         }
     }
+	IA[nodes_count_] = edges_count_;
 }
 /**
  * Calculate a number of the not-divided and divided cells

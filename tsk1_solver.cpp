@@ -19,7 +19,7 @@ SolverSolution solverCG( NetGraph& matrix, MathVector& right_part, bool print_de
     // Generate an initial guess vector
     MathVector initial_guess( row_count);
     for( size_t vec_idx = 0; vec_idx < row_count; ++vec_idx){
-        initial_guess[vec_idx] = vec_idx + 1;
+        initial_guess[vec_idx] = 0;
     }
     bool has_converged = false;
     size_t iteration_num = 1;

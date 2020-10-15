@@ -65,7 +65,7 @@ MathVector sparseMV( NetGraph& graph, MathVector& vec){
     }
     return new_vec;
 }
-    #ifdef MEASURE_VECTOR_OPS
+#ifdef MEASURE_VECTOR_OPS
 /**
  * The wrappers over the basic operations.
  * Calculate the time of the basic operations and append it to the time.
@@ -94,4 +94,4 @@ MathVector sparseMVWithMeasure( NetGraph& graph, MathVector& vec, double& time){
     time += end_time - start_time;
     return sparse_mv;
 }
-    #endif
+#endif
