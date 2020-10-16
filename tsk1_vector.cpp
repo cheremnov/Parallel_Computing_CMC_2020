@@ -1,5 +1,5 @@
 #include "tsk1_vector.h"
-#include "tests/test_vector.h"
+#include "tests/test_Vector.h"
 #include <cassert>
 /** 
  * Calculate a dot product of the two vectors
