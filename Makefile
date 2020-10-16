@@ -3,7 +3,7 @@ CFLAGS=-O3 -fopenmp --std=c++11
 LLIB = 
 ifeq ($(OS),Windows_NT)
 LLIB += -lpsapi
-TESTS_DIR := tests\
+TESTS_DIR := tests\\
 else
 TESTS_DIR := tests\/
 endif
