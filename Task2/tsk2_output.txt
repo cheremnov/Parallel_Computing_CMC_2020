@@ -1,0 +1,241 @@
+Edges to: 0 1 11 
+Node index: 1
+Edges to: 0 1 2 12 
+Node index: 2
+Edges to: 1 2 3 12 13 
+Node index: 3
+Edges to: 2 3 4 14 
+Node index: 4
+Edges to: 3 4 5 14 15 
+Node index: 5
+Edges to: 4 5 6 16 
+Node index: 6
+Edges to: 5 6 7 16 17 
+Node index: 7
+Edges to: 6 7 8 18 
+Node index: 8
+Edges to: 7 8 9 18 19 
+Node index: 9
+Edges to: 8 9 10 20 
+Node index: 10
+Edges to: 9 10 20 21 
+Node index: 11
+Edges to: 0 11 12 22 
+Node index: 12
+Edges to: 1 2 11 12 13 23 
+Node index: 13
+Edges to: 2 12 13 14 23 24 
+Node index: 14
+Edges to: 3 4 13 14 15 25 
+Node index: 15
+Edges to: 4 14 15 16 25 26 
+Node index: 16
+Edges to: 5 6 15 16 17 27 
+Node index: 17
+Edges to: 6 16 17 18 27 28 
+Node index: 18
+Edges to: 7 8 17 18 19 29 
+Node index: 19
+Edges to: 8 18 19 20 29 30 
+Node index: 20
+Edges to: 9 10 19 20 21 31 
+Node index: 21
+Edges to: 10 20 21 31 32 
+Node index: 22
+Edges to: 11 22 23 33 
+Node index: 23
+Edges to: 12 13 22 23 24 34 
+Node index: 24
+Edges to: 13 23 24 25 34 35 
+Node index: 25
+Edges to: 14 15 24 25 26 36 
+Node index: 26
+Edges to: 15 25 26 27 36 37 
+Node index: 27
+Edges to: 16 17 26 27 28 38 
+Node index: 28
+Edges to: 17 27 28 29 38 39 
+Node index: 29
+Edges to: 18 19 28 29 30 40 
+Node index: 30
+Edges to: 19 29 30 31 40 41 
+Node index: 31
+Edges to: 20 21 30 31 32 42 
+Node index: 32
+Edges to: 21 31 32 42 43 
+Node index: 33
+Edges to: 22 33 34 44 
+Node index: 34
+Edges to: 23 24 33 34 35 45 
+Node index: 35
+Edges to: 24 34 35 36 45 46 
+Node index: 36
+Edges to: 25 26 35 36 37 47 
+Node index: 37
+Edges to: 26 36 37 38 47 48 
+Node index: 38
+Edges to: 27 28 37 38 39 49 
+Node index: 39
+Edges to: 28 38 39 40 49 50 
+Node index: 40
+Edges to: 29 30 39 40 41 51 
+Node index: 41
+Edges to: 30 40 41 42 51 52 
+Node index: 42
+Edges to: 31 32 41 42 43 53 
+Node index: 43
+Edges to: 32 42 43 53 54 
+Node index: 44
+Edges to: 33 44 45 55 
+Node index: 45
+Edges to: 34 35 44 45 46 56 
+Node index: 46
+Edges to: 35 45 46 47 56 57 
+Node index: 47
+Edges to: 36 37 46 47 48 58 
+Node index: 48
+Edges to: 37 47 48 49 58 59 
+Node index: 49
+Edges to: 38 39 48 49 50 60 
+Node index: 50
+Edges to: 39 49 50 51 60 61 
+Node index: 51
+Edges to: 40 41 50 51 52 62 
+Node index: 52
+Edges to: 41 51 52 53 62 63 
+Node index: 53
+Edges to: 42 43 52 53 54 64 
+Node index: 54
+Edges to: 43 53 54 64 65 
+Node index: 55
+Edges to: 44 55 56 66 
+Node index: 56
+Edges to: 45 46 55 56 57 67 
+Node index: 57
+Edges to: 46 56 57 58 67 68 
+Node index: 58
+Edges to: 47 48 57 58 59 69 
+Node index: 59
+Edges to: 48 58 59 60 69 70 
+Node index: 60
+Edges to: 49 50 59 60 61 71 
+Node index: 61
+Edges to: 50 60 61 62 71 72 
+Node index: 62
+Edges to: 51 52 61 62 63 73 
+Node index: 63
+Edges to: 52 62 63 64 73 74 
+Node index: 64
+Edges to: 53 54 63 64 65 75 
+Node index: 65
+Edges to: 54 64 65 75 76 
+Node index: 66
+Edges to: 55 66 67 77 
+Node index: 67
+Edges to: 56 57 66 67 68 78 
+Node index: 68
+Edges to: 57 67 68 69 78 79 
+Node index: 69
+Edges to: 58 59 68 69 70 80 
+Node index: 70
+Edges to: 59 69 70 71 80 81 
+Node index: 71
+Edges to: 60 61 70 71 72 82 
+Node index: 72
+Edges to: 61 71 72 73 82 83 
+Node index: 73
+Edges to: 62 63 72 73 74 84 
+Node index: 74
+Edges to: 63 73 74 75 84 85 
+Node index: 75
+Edges to: 64 65 74 75 76 86 
+Node index: 76
+Edges to: 65 75 76 86 87 
+Node index: 77
+Edges to: 66 77 78 88 
+Node index: 78
+Edges to: 67 68 77 78 79 89 
+Node index: 79
+Edges to: 68 78 79 80 89 90 
+Node index: 80
+Edges to: 69 70 79 80 81 91 
+Node index: 81
+Edges to: 70 80 81 82 91 92 
+Node index: 82
+Edges to: 71 72 81 82 83 93 
+Node index: 83
+Edges to: 72 82 83 84 93 94 
+Node index: 84
+Edges to: 73 74 83 84 85 95 
+Node index: 85
+Edges to: 74 84 85 86 95 96 
+Node index: 86
+Edges to: 75 76 85 86 87 97 
+Node index: 87
+Edges to: 76 86 87 97 98 
+Node index: 88
+Edges to: 77 88 89 99 
+Node index: 89
+Edges to: 78 79 88 89 90 100 
+Node index: 90
+Edges to: 79 89 90 91 100 101 
+Node index: 91
+Edges to: 80 81 90 91 92 102 
+Node index: 92
+Edges to: 81 91 92 93 102 103 
+Node index: 93
+Edges to: 82 83 92 93 94 104 
+Node index: 94
+Edges to: 83 93 94 95 104 105 
+Node index: 95
+Edges to: 84 85 94 95 96 106 
+Node index: 96
+Edges to: 85 95 96 97 106 107 
+Node index: 97
+Edges to: 86 87 96 97 98 108 
+Node index: 98
+Edges to: 87 97 98 108 109 
+Node index: 99
+Edges to: 88 99 100 110 
+Node index: 100
+Edges to: 89 90 99 100 101 111 
+Node index: 101
+Edges to: 90 100 101 102 111 112 
+Node index: 102
+Edges to: 91 92 101 102 103 113 
+Node index: 103
+Edges to: 92 102 103 104 113 114 
+Node index: 104
+Edges to: 93 94 103 104 105 115 
+Node index: 105
+Edges to: 94 104 105 106 115 116 
+Node index: 106
+Edges to: 95 96 105 106 107 117 
+Node index: 107
+Edges to: 96 106 107 108 117 118 
+Node index: 108
+Edges to: 97 98 107 108 109 119 
+Node index: 109
+Edges to: 98 108 109 119 120 
+Node index: 110
+Edges to: 99 110 111 
+Node index: 111
+Edges to: 100 101 110 111 112 
+Node index: 112
+Edges to: 101 111 112 113 
+Node index: 113
+Edges to: 102 103 112 113 114 
+Node index: 114
+Edges to: 103 113 114 115 
+Node index: 115
+Edges to: 104 105 114 115 116 
+Node index: 116
+Edges to: 105 115 116 117 
+Node index: 117
+Edges to: 106 107 116 117 118 
+Node index: 118
+Edges to: 107 117 118 119 
+Node index: 119
+Edges to: 108 109 118 119 120 
+Node index: 120
+Edges to: 109 119 120 
